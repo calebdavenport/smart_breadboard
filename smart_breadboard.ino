@@ -258,20 +258,6 @@ ft_void_t SAMAPP_GPU_DLSwap(ft_uint8_t DL_Swap_Type)
 static ft_uint8_t home_star_icon[] = {0x78,0x9C,0xE5,0x94,0xBF,0x4E,0xC2,0x40,0x1C,0xC7,0x7F,0x2D,0x04,0x8B,0x20,0x45,0x76,0x14,0x67,0xA3,0xF1,0x0D,0x64,0x75,0xD2,0xD5,0x09,0x27,0x17,0x13,0xE1,0x0D,0xE4,0x0D,0x78,0x04,0x98,0x5D,0x30,0x26,0x0E,0x4A,0xA2,0x3E,0x82,0x0E,0x8E,0x82,0xC1,0x38,0x62,0x51,0x0C,0x0A,0x42,0x7F,0xDE,0xB5,0x77,0xB4,0x77,0x17,0x28,0x21,0x26,0x46,0xFD,0x26,0xCD,0xE5,0xD3,0x7C,0xFB,0xBB,0xFB,0xFD,0xB9,0x02,0xCC,0xA4,0xE8,0x99,0x80,0x61,0xC4,0x8A,0x9F,0xCB,0x6F,0x31,0x3B,0xE3,0x61,0x7A,0x98,0x84,0x7C,0x37,0xF6,0xFC,0xC8,0xDD,0x45,0x00,0xDD,0xBA,0xC4,0x77,0xE6,0xEE,0x40,0xEC,0x0E,0xE6,0x91,0xF1,0xD2,0x00,0x42,0x34,0x5E,0xCE,0xE5,0x08,0x16,0xA0,0x84,0x68,0x67,0xB4,0x86,0xC3,0xD5,0x26,0x2C,0x20,0x51,0x17,0xA2,0xB8,0x03,0xB0,0xFE,0x49,0xDD,0x54,0x15,0xD8,0xEE,0x73,0x37,0x95,0x9D,0xD4,0x1A,0xB7,0xA5,0x26,0xC4,0x91,0xA9,0x0B,0x06,0xEE,0x72,0xB7,0xFB,0xC5,0x16,0x80,0xE9,0xF1,0x07,0x8D,0x3F,0x15,0x5F,0x1C,0x0B,0xFC,0x0A,0x90,0xF0,0xF3,0x09,0xA9,0x90,0xC4,0xC6,0x37,0xB0,0x93,0xBF,0xE1,0x71,0xDB,0xA9,0xD7,0x41,0xAD,0x46,0xEA,0x19,0xA9,0xD5,0xCE,0x93,0xB3,0x35,0x73,0x0A,0x69,0x59,0x91,0xC3,0x0F,0x22,0x1B,0x1D,0x91,0x13,0x3D,0x91,0x73,0x43,0xF1,0x6C,0x55,0xDA,0x3A,0x4F,0xBA,0x25,0xCE,0x4F,0x04,0xF1,0xC5,0xCF,0x71,0xDA,0x3C,0xD7,0xB9,0xB2,0x48,0xB4,0x89,0x38,0x20,0x4B,0x2A,0x95,0x0C,0xD5,0xEF,0x5B,0xAD,0x96,0x45,0x8A,0x41,0x96,0x7A,0x1F,0x60,0x0D,0x7D,0x22,0x75,0x82,0x2B,0x0F,0xFB,0xCE,0x51,0x3D,0x2E,0x3A,0x21,0xF3,0x1C,0xD9,0x38,0x86,0x2C,0xC6,0x05,0xB6,0x7B,0x9A,0x8F,0x0F,0x97,0x1B,0x72,0x6F,0x1C,0xEB,0xAE,0xFF,0xDA,0x97,0x0D,0xBA,0x43,0x32,0xCA,0x66,0x34,0x3D,0x54,0xCB,0x24,0x9B,0x43,0xF2,0x70,0x3E,0x42,0xBB,0xA0,0x95,0x11,0x37,0x46,0xE1,0x4F,0x49,0xC5,0x1B,0xFC,0x3C,0x3A,0x3E,0xD1,0x65,0x0E,0x6F,0x58,0xF8,0x9E,0x5B,0xDB,0x55,0xB6,0x41,0x34,0xCB,0xBE,0xDB,0x87,0x5F,0xA9,0xD1,0x85,0x6B,0xB3,0x17,0x9C,0x61,0x0C,0x9B,0xA2,0x5D,0x61,0x10,0xED,0x2A,0x9B,0xA2,0x5D,0x61,0x10,0xED,0x2A,0x9B,0xA2,0x5D,0x61,0x10,0xED,0x2A,0x9B,0xED,0xC9,0xFC,0xDF,0x14,0x54,0x8F,0x80,0x7A,0x06,0xF5,0x23,0xA0,0x9F,0x41,0xF3,0x10,0x30,0x4F,0x41,0xF3,0x18,0x30,0xCF,0xCA,0xFC,0xFF,0x35,0xC9,0x79,0xC9,0x89,0xFA,0x33,0xD7,0x1D,0xF6,0x5E,0x84,0x5C,0x56,0x6E,0xA7,0xDA,0x1E,0xF9,0xFA,0xAB,0xF5,0x97,0xFF,0x2F,0xED,0x89,0x7E,0x29,0x9E,0xB4,0x9F,0x74,0x1E,0x69,0xDA,0xA4,0x9F,0x81,0x94,0xEF,0x4F,0xF6,0xF9,0x0B,0xF4,0x65,0x51,0x08};
 
 
-char* const info[] PROGMEM = { "big oof machine", //"FT800 KeyBoard Application",
-
-                         "reeeeeeeeeeeeeeee",
-                         "eeeeeeeeeeeeeeeee",
-                         "Press button",
-                         
-                         "APP to demonstrate interactive Key Board,",
-                         "using String, Keys",
-                         "& Buttons."
-
-                       }; 
-
-
-
 struct 
 {
 	ft_uint8_t Key_Detect :1;
@@ -358,19 +344,6 @@ ft_uint8_t Read_Keypad()
   return Read_tag;
 }
 
-// API used to calculate the width of the character
-
-ft_uint8_t Ft_Gpu_Rom_Font_WH(ft_uint8_t Char,ft_uint8_t font)
-{
-	ft_uint32_t ptr,Wptr;
-	ft_uint8_t Width=0;
-	ptr = Ft_Gpu_Hal_Rd32(phost,0xffffc);						
-// Read Width of the character
-	Wptr = (ptr + (148 * (font- 16)))+Char;	// (table starts at font 16)
-	Width = Ft_Gpu_Hal_Rd8(phost,Wptr);
-	return Width;
-}
-
 // Notepad buffer
 void Notepad(void)
 {
@@ -380,104 +353,13 @@ void Notepad(void)
   ft_uint8_t Read_sfk=0,	tval;
   ft_uint16_t noofchars=0,line2disp =0,nextline = 0;	
   ft_uint8_t   font = 27;
-
-//Clear Linebuffer
-  for(tval=0;tval<MAX_LINES;tval++)
-  memset(&Buffer.notepad[tval],'\0',sizeof(Buffer.notepad[tval]));
-
-/*intial setup*/
-  Line = 0;					// Starting line
-  Disp_pos=LINE_STARTPOS;	                        // starting pos                                                      
-  Flag.Numeric = OFF;                             // Disable the numbers and spcial charaters
-  memset((Buffer.notepad[Line]+0),'_',1);	  	// For Cursor	
-  Disp_pos += Ft_Gpu_Rom_Font_WH(Buffer.notepad[Line][0],Font);	// Update the Disp_Pos
-  noofchars+=1;                                                   // for cursor
+  
 /*enter*/
   Flag.Exit = 0;
   do
   {
     Read_sfk = Read_Keypad();                // read the keys   
      
-    if(Flag.Key_Detect)
-    {                    // check if key is pressed
-    Flag.Key_Detect = 0;                     // clear it  
-    if(Read_sfk >= SPECIAL_FUN)
-    {              // check any special function keys are pressed 
-      switch(Read_sfk)
-      {
-        case BACK_SPACE:
-          if(noofchars>1)  // check in the line there is any characters are present,cursor not include
-          {
-	    noofchars-=1;                      // clear the character inthe buffer
-	    Disp_pos -= Ft_Gpu_Rom_Font_WH(*(Buffer.notepad[Line]+noofchars-1),Font); // Update the Disp_Pos										
-          }else 
-          {
-            if(Line >= (MAX_LINES-1)) Line--; else Line=0;              // check the lines
-            noofchars = strlen(Buffer.notepad[Line]);		    // Read the len of the line 
-            for(tval=0;tval<noofchars;tval++)			     // Compute the length of the Line
-            Disp_pos += Ft_Gpu_Rom_Font_WH(Buffer.notepad[Line][tval],Font);  // Update the Disp_Pos
-          }
-          Buffer.temp = (Buffer.notepad[Line]+noofchars);     // load into temporary buffer         									
-          Buffer.temp[-1] = '_';				  // update the string  							
-          Buffer.temp[0] = '\0';	
-        break;
-
-        case CAPS_LOCK:
-          Flag.Caps ^= 1;        // toggle the caps lock on when the key detect
-        break;
-      
-        case NUMBER_LOCK:
-          Flag.Numeric ^= 1;    // toggle the number lock on when the key detect
-        break;
-
-        case BACK:
-          for(tval=0;tval<MAX_LINES;tval++)
-          memset(&Buffer.notepad[tval],'\0',sizeof(Buffer.notepad[tval]));    
-          Line = 0;					// Starting line
-          Disp_pos=LINE_STARTPOS;	                        // starting pos                                                      
-   //       Flag.Numeric = OFF;                             // Disable the numbers and spcial charaters
-          memset((Buffer.notepad[Line]+0),'_',1);	  	// For Cursor	
-          Disp_pos += Ft_Gpu_Rom_Font_WH(Buffer.notepad[Line][0],Font);	// Update the Disp_Pos
-          noofchars+=1;                                                
-        break;
-      }
-    }
-    else 
-    {
-  // String and Line Termination    
-      Disp_pos += Ft_Gpu_Rom_Font_WH(Read_sfk,Font);              // update dispos
-      Buffer.temp = Buffer.notepad[Line]+strlen(Buffer.notepad[Line]);  // load into temporary buffer 
-      Buffer.temp[-1] = Read_sfk;		 // update the string  									
-      Buffer.temp[0] = '_';													
-      Buffer.temp[1] = '\0';	
-      noofchars = strlen(Buffer.notepad[Line]);    // get the string len
-      if(Disp_pos > LINE_ENDPOS)                  // check if there is place to put a character in a specific line
-      {
-	Buffer.temp = Buffer.notepad[Line]+(strlen(Buffer.notepad[Line])-1);					
-	Buffer.temp[0] = '\0';
-	noofchars-=1;
-	Disp_pos = LINE_STARTPOS;
-	Line++;	if(Line >= MAX_LINES)	Line = 0;													
-	memset((Buffer.notepad[Line]),'\0',sizeof(Buffer.notepad[Line]));	// Clear the line buffer
-	for(;noofchars>=1;noofchars--,tval++)
-	{
-	  if(Buffer.notepad[Line-1][noofchars] == ' ' ||Buffer.notepad[Line-1][noofchars] =='.')// In case of space(New String) or end of statement(.)
-	  {
-            memset(Buffer.notepad[Line-1]+noofchars,'\0',1);
-	    noofchars+=1;							// Include the space			
-	    memcpy(&Buffer.notepad[Line],(Buffer.notepad[Line-1]+noofchars),tval);
-	    break;
-	  }
-	}
-	noofchars = strlen(Buffer.notepad[Line]);
-	Buffer.temp = Buffer.notepad[Line]+noofchars;	
-	Buffer.temp[0] = '_';	
-	Buffer.temp[1] = '\0';						
-	for(tval=0;tval<noofchars;tval++)									
-	Disp_pos += Ft_Gpu_Rom_Font_WH(Buffer.notepad[Line][tval],Font);	// Update the Disp_Pos
-      }
-    }
-  }
 		
 // Start the new Display list
   Ft_Gpu_CoCmd_Dlstart(phost); 
@@ -487,55 +369,7 @@ void Notepad(void)
   Ft_App_WrCoCmd_Buffer(phost,TAG_MASK(1));            // enable tagbuffer updation
   Ft_Gpu_CoCmd_FgColor(phost,0x993366);  
   Ft_Gpu_CoCmd_BgColor(phost,0x662244);
-  //Ft_Gpu_CoCmd_FgColor(phost,0x703800);  
-  //Ft_Gpu_CoCmd_BgColor(phost,0x703800);
-  /*
-  But_opt = (Read_sfk== BACK)?  OPT_FLAT:0;          // button color change if the button during press
-  Ft_App_WrCoCmd_Buffer(phost,TAG(BACK));														// Back		 Return to Home
-  Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth*0.355),(FT_DispHeight*0.83),(FT_DispWidth*0.146),(FT_DispHeight*0.112),font,But_opt,"Clear");
-  But_opt = (Read_sfk==BACK_SPACE)? OPT_FLAT:0;
-  Ft_App_WrCoCmd_Buffer(phost,TAG(BACK_SPACE));													// BackSpace
-  Ft_Gpu_CoCmd_Button(phost,(phost,FT_DispWidth*0.875),(FT_DispHeight*0.70),(FT_DispWidth*0.125),(FT_DispHeight*0.112),font,But_opt,"<-");	
-  But_opt = (Read_sfk==' ')? OPT_FLAT:0;
-  Ft_App_WrCoCmd_Buffer(phost,TAG(' '));															// Space
-  Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth*0.115),(FT_DispHeight*0.83),(FT_DispWidth*0.73),(FT_DispHeight*0.112),font,But_opt,"Space");
-
-  if(Flag.Numeric==OFF)
-  {
-    Ft_Gpu_CoCmd_Keys(phost,0,(FT_DispHeight*0.442),FT_DispWidth,(FT_DispHeight*0.112),font,Read_sfk,(Flag.Caps == ON ?"QWERTYUIOP":"qwertyuiop"));
-    Ft_Gpu_CoCmd_Keys(phost,(FT_DispWidth*0.042),(FT_DispHeight*0.57),(FT_DispWidth*0.96),(FT_DispHeight*0.112),font,Read_sfk,(Flag.Caps == ON ?"ASDFGHJKL":"asdfghjkl"));
-    Ft_Gpu_CoCmd_Keys(phost,(FT_DispWidth*0.125),(FT_DispHeight*0.70),(FT_DispWidth*0.73),(FT_DispHeight*0.112),font,Read_sfk,(Flag.Caps == ON ?"ZXCVBNM":"zxcvbnm"));	
-
-    But_opt = (Read_sfk== CAPS_LOCK)? OPT_FLAT:0;
-    Ft_App_WrCoCmd_Buffer(phost,TAG(CAPS_LOCK));																	// Capslock
-    Ft_Gpu_CoCmd_Button(phost,0,(FT_DispHeight*0.70),(FT_DispWidth*0.10),(FT_DispHeight*0.112),font,But_opt,"a^");
-    But_opt = (Read_sfk== NUMBER_LOCK)? OPT_FLAT:0;
-    Ft_App_WrCoCmd_Buffer(phost,TAG(NUMBER_LOCK));																// Numberlock		
-    Ft_Gpu_CoCmd_Button(phost,0,(FT_DispHeight*0.83),(FT_DispWidth*0.10),(FT_DispHeight*0.112),font,But_opt,"12*");
-  }
-  if(Flag.Numeric==ON)
-  {		
-    Ft_Gpu_CoCmd_Keys(phost,(FT_DispWidth*0),(FT_DispHeight*0.442),FT_DispWidth,(FT_DispHeight*0.112),font,Read_sfk,"1234567890");
-    Ft_Gpu_CoCmd_Keys(phost,(FT_DispWidth*0.042),(FT_DispHeight*0.57),(FT_DispWidth*0.96),(FT_DispHeight*0.112),font,Read_sfk,"-@#$%^&*(");
-    Ft_Gpu_CoCmd_Keys(phost,(FT_DispWidth*0.125),(FT_DispHeight*0.70),(FT_DispWidth*0.73),(FT_DispHeight*0.112),font,Read_sfk,")_+[]{}");				
-    But_opt = (Read_sfk== NUMBER_LOCK)? OPT_FLAT:0;
-    Ft_App_WrCoCmd_Buffer(phost,TAG(253));													// Numberlock
-    Ft_Gpu_CoCmd_Button(phost,0,(FT_DispHeight*0.83),(FT_DispWidth*0.10),(FT_DispHeight*0.112),font,But_opt,"AB*");
-  }
-  Ft_App_WrCoCmd_Buffer(phost,TAG_MASK(0));													// Disable the tag buffer updates
-  Ft_App_WrCoCmd_Buffer(phost,SCISSOR_XY(0,0));
-  Ft_App_WrCoCmd_Buffer(phost,SCISSOR_SIZE(FT_DispWidth,(ft_uint16_t)(FT_DispHeight*0.405)));	
-  Ft_App_WrCoCmd_Buffer(phost,CLEAR_COLOR_RGB(255,255,255));
-  Ft_App_WrCoCmd_Buffer(phost,CLEAR(1,1,1));
-  Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(0,0,0));												// Text Color
-  line2disp = 0;
-  while(line2disp <= Line)
-  {
-    nextline = 3 + (line2disp * (FT_DispHeight*.073));
-    Ft_Gpu_CoCmd_Text(phost,line2disp,nextline,font,0,(const char*)&Buffer.notepad[line2disp]);
-    line2disp++;
-  }*/
-  //Ft_Gpu_CoCmd_Keys(phost,0,(FT_DispHeight*0.1),FT_DispWidth,(FT_DispHeight*0.1),font,Read_sfk,"TEST");
+  
   int test;
   if (Read_sfk == 201) {
     test = 150;
@@ -557,29 +391,6 @@ void Notepad(void)
 }
 /***********************API used to SET the ICON******************************************/
 /*Refer the code flow in the flowchart availble in the Application Note */
-ft_void_t home_setup()
-{
-  /*Icon  file is deflated use J1 Command to inflate the file and write into the GRAM*/
-  Ft_Gpu_Hal_WrCmd32(phost,CMD_INFLATE);
-  Ft_Gpu_Hal_WrCmd32(phost,250*1024L);
-  Ft_Gpu_Hal_WrCmdBuf(phost,home_star_icon,sizeof(home_star_icon));
-  /*Set the Bitmap properties for the ICONS*/ 
-  Ft_Gpu_CoCmd_Dlstart(phost);        // start
-  Ft_App_WrCoCmd_Buffer(phost,CLEAR(1,1,1));
-  Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(255, 255, 255));
-  Ft_App_WrCoCmd_Buffer(phost,BITMAP_HANDLE(13));    // handle for background stars
-  Ft_App_WrCoCmd_Buffer(phost,BITMAP_SOURCE(250*1024L));      // Starting address in gram
-  Ft_App_WrCoCmd_Buffer(phost,BITMAP_LAYOUT(L4, 16, 32));  // format 
-  Ft_App_WrCoCmd_Buffer(phost,BITMAP_SIZE(NEAREST, REPEAT, REPEAT, 512, 512  ));
-  Ft_App_WrCoCmd_Buffer(phost,BITMAP_HANDLE(14));    // handle for background stars
-  Ft_App_WrCoCmd_Buffer(phost,BITMAP_SOURCE(250*1024L));      // Starting address in gram
-  Ft_App_WrCoCmd_Buffer(phost,BITMAP_LAYOUT(L4, 16, 32));  // format 
-  Ft_App_WrCoCmd_Buffer(phost,BITMAP_SIZE(NEAREST, BORDER, BORDER, 32, 32  ));
-  Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
-  Ft_Gpu_CoCmd_Swap(phost);
-  Ft_App_Flush_Co_Buffer(phost);
-  Ft_Gpu_Hal_WaitCmdfifo_empty(phost);
-}
 /* Information API*/
 ft_void_t Info()
 {
@@ -752,113 +563,16 @@ ft_void_t Ft_BootupConfig()
 	Ft_Gpu_Hal_SetSPI(phost,FT_GPU_SPI_SINGLE_CHANNEL,FT_GPU_SPI_ONEDUMMY);
 
 #endif
-
-#ifdef FT900_PLATFORM
-
-#ifdef ENABLE_SPI_QUAD
-	spi_option(SPIM,spi_option_bus_width,4);	
-#elif ENABLE_SPI_DUAL	
-	spi_option(SPIM,spi_option_bus_width,2);	
-#else	
-	spi_option(SPIM,spi_option_bus_width,1);
-#endif
-
-	spi_option(SPIM,spi_option_fifo_size,64);
-	spi_option(SPIM,spi_option_fifo,1);
-	spi_option(SPIM,spi_option_fifo_receive_trigger,1);
-	
-#endif
 #endif
 phost->ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(phost,REG_CMD_WRITE);
 
 }
 
 
-#ifdef FT900_PLATFORM
-	ft_void_t FT900_Config()
-{
-		sys_enable(sys_device_uart0);
-	    gpio_function(48, pad_uart0_txd); /* UART0 TXD */
-	    gpio_function(49, pad_uart0_rxd); /* UART0 RXD */
-	    uart_open(UART0,                    /* Device */
-	              1,                        /* Prescaler = 1 */
-	              UART_DIVIDER_115200_BAUD,  /* Divider = 1302 */
-	              uart_data_bits_8,         /* No. Data Bits */
-	              uart_parity_none,         /* Parity */
-	              uart_stop_bits_1);        /* No. Stop Bits */
-
-	    /* Print out a welcome message... */
-	    uart_puts(UART0,
-
-	        "(C) Copyright 2014-2015, Future Technology Devices International Ltd. \r\n"
-	        "--------------------------------------------------------------------- \r\n"
-	        "Welcome to Gradient Example ... \r\n"
-	        "\r\n"
-	        "--------------------------------------------------------------------- \r\n"
-	        );
-
-#ifdef ENABLE_ILI9488_HVGA_PORTRAIT
-	/* asign all the respective pins to gpio and set them to default values */
-	gpio_function(34, pad_gpio34);
-	gpio_dir(34, pad_dir_output);
-    gpio_write(34,1);
-
-	gpio_function(27, pad_gpio27);
-	gpio_dir(27, pad_dir_output);
-    gpio_write(27,1);
-
-	gpio_function(29, pad_gpio29);
-	gpio_dir(29, pad_dir_output);
-    gpio_write(29,1);
-
-    gpio_function(33, pad_gpio33);
-    gpio_dir(33, pad_dir_output);
-    gpio_write(33,1);
-
-
-    gpio_function(30, pad_gpio30);
-    gpio_dir(30, pad_dir_output);
-    gpio_write(30,1);
-
-	gpio_function(28, pad_gpio28);
-	gpio_dir(28, pad_dir_output);
-    gpio_write(28,1);
-
-
-  	gpio_function(43, pad_gpio43);
-  	gpio_dir(43, pad_dir_output);
-    gpio_write(43,1);
-	gpio_write(34,1);
-	gpio_write(28,1);
-	gpio_write(43,1);
-	gpio_write(33,1);
-	gpio_write(33,1);
-
-#endif
-	/* useful for timer */
-	ft_millis_init();
-	interrupt_enable_globally();
-	//printf("ft900 config done \n");
-}
-#endif
-
-
-
-
-
-#if defined MSVC_PLATFORM | defined FT900_PLATFORM
 /* Main entry point */
-ft_int32_t main(ft_int32_t argc,ft_char8_t *argv[])
-#endif
-#if defined(ARDUINO_PLATFORM)||defined(MSVC_FT800EMU)
-ft_void_t setup()
-#endif
-{
+ft_void_t setup() {
 
 	 ft_uint8_t chipid;
-#ifdef FT900_PLATFORM
-	FT900_Config();
-#endif
 	Ft_Gpu_HalInit_t halinit;
 	
 	halinit.TotalChannelNum = 1;
@@ -867,44 +581,27 @@ ft_void_t setup()
   Ft_Gpu_Hal_Init(&halinit);
   host.hal_config.channel_no = 0;
   host.hal_config.pdn_pin_no = FT800_PD_N;
-host.hal_config.spi_cs_pin_no = FT800_SEL_PIN;
-#ifdef MSVC_PLATFORM_SPI
-  host.hal_config.spi_clockrate_khz = 12000; //in KHz
-#endif
-#ifdef ARDUINO_PLATFORM_SPI
+  host.hal_config.spi_cs_pin_no = FT800_SEL_PIN;
+  
   host.hal_config.spi_clockrate_khz = 4000; //in KHz
-#endif
+  
   Ft_Gpu_Hal_Open(&host);
 
   phost = &host;
 
     Ft_BootupConfig();
-#ifdef FT900_PLATFORM
-    Ft_Gpu_ClockTrimming(phost,LOW_FREQ_BOUND);
-    /* Change clock freuency to 25mhz */
-	spi_init(SPIM, spi_dir_master, spi_mode_0, 4);
-	spi_option(SPIM,spi_option_bus_width,1);
-	spi_option(SPIM,spi_option_fifo_size,64);
-	spi_option(SPIM,spi_option_fifo,1);
-	spi_option(SPIM,spi_option_fifo_receive_trigger,1);
-#endif
-#if ((defined FT900_PLATFORM) || defined(MSVC_PLATFORM))
-	printf("\n reg_touch_rz =0x%x ", Ft_Gpu_Hal_Rd16(phost, REG_TOUCH_RZ));
-	printf("\n reg_touch_rzthresh =0x%x ", Ft_Gpu_Hal_Rd32(phost, REG_TOUCH_RZTHRESH));
-    printf("\n reg_touch_tag_xy=0x%x",Ft_Gpu_Hal_Rd32(phost, REG_TOUCH_TAG_XY));
-	printf("\n reg_touch_tag=0x%x",Ft_Gpu_Hal_Rd32(phost, REG_TOUCH_TAG));
-#endif
 
     /*It is optional to clear the screen here*/	
     Ft_Gpu_Hal_WrMem(phost, RAM_DL,(ft_uint8_t *)FT_DLCODE_BOOTUP,sizeof(FT_DLCODE_BOOTUP));
     Ft_Gpu_Hal_Wr8(phost, REG_DLSWAP,DLSWAP_FRAME);
     
-    Ft_Gpu_Hal_Sleep(1000);//Show the booting up screen.
+    //Ft_Gpu_Hal_Sleep(1000);//Show the booting up screen.
 
 
 
-  home_setup();
+  //home_setup();
   Info();
+  Ft_Gpu_Hal_Sleep(100);
   Notepad();
 
 #ifdef MSVC_PLATFORM
