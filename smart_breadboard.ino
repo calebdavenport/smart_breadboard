@@ -492,7 +492,7 @@ void Notepad(void)
   /*
   But_opt = (Read_sfk== BACK)?  OPT_FLAT:0;          // button color change if the button during press
   Ft_App_WrCoCmd_Buffer(phost,TAG(BACK));														// Back		 Return to Home
-  Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth*0.855),(FT_DispHeight*0.83),(FT_DispWidth*0.146),(FT_DispHeight*0.112),font,But_opt,"Clear");	
+  Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth*0.355),(FT_DispHeight*0.83),(FT_DispWidth*0.146),(FT_DispHeight*0.112),font,But_opt,"Clear");
   But_opt = (Read_sfk==BACK_SPACE)? OPT_FLAT:0;
   Ft_App_WrCoCmd_Buffer(phost,TAG(BACK_SPACE));													// BackSpace
   Ft_Gpu_CoCmd_Button(phost,(phost,FT_DispWidth*0.875),(FT_DispHeight*0.70),(FT_DispWidth*0.125),(FT_DispHeight*0.112),font,But_opt,"<-");	
@@ -536,8 +536,18 @@ void Notepad(void)
     line2disp++;
   }*/
   //Ft_Gpu_CoCmd_Keys(phost,0,(FT_DispHeight*0.1),FT_DispWidth,(FT_DispHeight*0.1),font,Read_sfk,"TEST");
-  Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth-100),0,100,FT_DispHeight,26,0,"Next");
-  Ft_Gpu_CoCmd_Button(phost,0,0,100,FT_DispHeight,26,0,"Prev");
+  int test;
+  if (Read_sfk == 201) {
+    test = 150;
+  } else {
+    test = 100;
+  }
+  But_opt = (Read_sfk== 201)?  OPT_FLAT:0;
+  Ft_App_WrCoCmd_Buffer(phost,TAG(201));
+  Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth-test),(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Next");
+  But_opt = (Read_sfk== 200)?  OPT_FLAT:0;
+  Ft_App_WrCoCmd_Buffer(phost,TAG(200));
+  Ft_Gpu_CoCmd_Button(phost,2,(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Prev");
   Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
   Ft_Gpu_CoCmd_Swap(phost);
   Ft_App_Flush_Co_Buffer(phost);
@@ -579,76 +589,13 @@ ft_void_t Info()
   Ft_Gpu_CoCmd_Dlstart(phost); 
   Ft_App_WrCoCmd_Buffer(phost,CLEAR(1,1,1));
   Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(255,255,255));
-  Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2,26,OPT_CENTERX|OPT_CENTERY,"Please tap on a dot, ya nerd.");
+  Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2 - 15,26,OPT_CENTERX|OPT_CENTERY,"Touch Screen Calibration");
+  Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2 + 15,26,OPT_CENTERX|OPT_CENTERY,"Touch the dots");
   Ft_Gpu_CoCmd_Calibrate(phost,0);
   Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
   Ft_Gpu_CoCmd_Swap(phost);
   Ft_App_Flush_Co_Buffer(phost);
   Ft_Gpu_Hal_WaitCmdfifo_empty(phost);
-  // Ftdi Logo animation  
-  Ft_Gpu_CoCmd_Logo(phost);
-  Ft_App_Flush_Co_Buffer(phost);
-  Ft_Gpu_Hal_WaitCmdfifo_empty(phost);
-  while(0!=Ft_Gpu_Hal_Rd16(phost,REG_CMD_READ)); 
-  dloffset = Ft_Gpu_Hal_Rd16(phost,REG_CMD_DL);
-  dloffset -=4;
-#ifdef FT_81X_ENABLE
-  dloffset -= 2*4;//remove two more instructions in case of 81x
-#endif  
-  //Copy the Displaylist from DL RAM to GRAM
-  Ft_Gpu_Hal_WrCmd32(phost,CMD_MEMCPY);
-  Ft_Gpu_Hal_WrCmd32(phost,100000L);
-  Ft_Gpu_Hal_WrCmd32(phost,RAM_DL);
-  Ft_Gpu_Hal_WrCmd32(phost,dloffset);
-  //Enter into Info Screen
-  do
-  {
-    Ft_Gpu_CoCmd_Dlstart(phost);   
-    Ft_Gpu_CoCmd_Append(phost,100000L,dloffset);
-    //Reset the BITMAP properties used during Logo animation
-    Ft_App_WrCoCmd_Buffer(phost,BITMAP_TRANSFORM_A(256));
-    Ft_App_WrCoCmd_Buffer(phost,BITMAP_TRANSFORM_A(256));
-    Ft_App_WrCoCmd_Buffer(phost,BITMAP_TRANSFORM_B(0));
-    Ft_App_WrCoCmd_Buffer(phost,BITMAP_TRANSFORM_C(0));
-    Ft_App_WrCoCmd_Buffer(phost,BITMAP_TRANSFORM_D(0));
-    Ft_App_WrCoCmd_Buffer(phost,BITMAP_TRANSFORM_E(256));
-    Ft_App_WrCoCmd_Buffer(phost,BITMAP_TRANSFORM_F(0)); 
-   //Display the information with transparent Logo using Edge Strip   
-    Ft_App_WrCoCmd_Buffer(phost,SAVE_CONTEXT());	
-    Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(219,180,150));
-    Ft_App_WrCoCmd_Buffer(phost,COLOR_A(220));
-    Ft_App_WrCoCmd_Buffer(phost,BEGIN(EDGE_STRIP_A));
-    Ft_App_WrCoCmd_Buffer(phost,VERTEX2F(0,FT_DispHeight*16));
-    Ft_App_WrCoCmd_Buffer(phost,VERTEX2F(FT_DispWidth*16,FT_DispHeight*16));
-    Ft_App_WrCoCmd_Buffer(phost,COLOR_A(255));
-    Ft_App_WrCoCmd_Buffer(phost,RESTORE_CONTEXT());	
-    Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(0,0,0));
-   // INFORMATION 
-    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,20,28,OPT_CENTERX|OPT_CENTERY,(char*)pgm_read_word(&info[0]));
-    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,60,26,OPT_CENTERX|OPT_CENTERY,(char*)pgm_read_word(&info[1]));
-    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,90,26,OPT_CENTERX|OPT_CENTERY,(char*)pgm_read_word(&info[2]));  
-    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,120,26,OPT_CENTERX|OPT_CENTERY,(char*)pgm_read_word(&info[3]));  
-    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight-30,26,OPT_CENTERX|OPT_CENTERY,"Click to play");
-    //Check if the Play key and change the color
-    if(sk!='P')
-    Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(255,255,255));
-    else
-    Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(100,100,100));
-    Ft_App_WrCoCmd_Buffer(phost,BEGIN(FTPOINTS));   
-    Ft_App_WrCoCmd_Buffer(phost,POINT_SIZE(20*16));
-    Ft_App_WrCoCmd_Buffer(phost,TAG('P'));
-    Ft_App_WrCoCmd_Buffer(phost,VERTEX2F((FT_DispWidth/2)*16,(FT_DispHeight-60)*16));
-    Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(35,180,35));
-    //Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(180,35,35));
-    Ft_App_WrCoCmd_Buffer(phost,BEGIN(BITMAPS));
-    Ft_App_WrCoCmd_Buffer(phost,VERTEX2II((FT_DispWidth/2)-14,(FT_DispHeight-75),14,4));
-    Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
-    Ft_Gpu_CoCmd_Swap(phost);
-    Ft_App_Flush_Co_Buffer(phost);
-    Ft_Gpu_Hal_WaitCmdfifo_empty(phost);
-  }while(Read_keys()!='P');
-  Play_Sound(0x51,255);
-  /* wait until Play key is not pressed*/ 
 }
 ft_void_t Ft_BootupConfig()
 {
@@ -894,6 +841,11 @@ phost->ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(phost,REG_CMD_WRITE);
 	//printf("ft900 config done \n");
 }
 #endif
+
+
+
+
+
 #if defined MSVC_PLATFORM | defined FT900_PLATFORM
 /* Main entry point */
 ft_int32_t main(ft_int32_t argc,ft_char8_t *argv[])
