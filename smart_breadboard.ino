@@ -80,40 +80,40 @@ ft_uint8_t  Ft_CmdBuffer[FT_CMD_FIFO_SIZE];
 /* Initial boot up DL - make the back ground green color */
 const ft_uint8_t FT_DLCODE_BOOTUP[12] =
 {
-    0,0,0,2,//GPU instruction CLEAR_COLOR_RGB
-    7,0,0,38, //GPU instruction CLEAR
+  0,0,0,2,//GPU instruction CLEAR_COLOR_RGB
+  7,0,0,38, //GPU instruction CLEAR
 
-    0,0,0,0,  //GPU instruction DISPLAY
+  0,0,0,0,  //GPU instruction DISPLAY
 };
 ft_void_t Ft_App_WrCoCmd_Buffer(Ft_Gpu_Hal_Context_t *phost,ft_uint32_t cmd)
 {
-#ifdef  BUFFER_OPTIMIZATION
-   /* Copy the command instruction into buffer */
-   ft_uint32_t *pBuffcmd;
-   pBuffcmd =(ft_uint32_t*)&Ft_CmdBuffer[Ft_CmdBuffer_Index];
-   *pBuffcmd = cmd;
-#endif
-   Ft_Gpu_Hal_WrCmd32(phost,cmd);
-   /* Increment the command index */
-   Ft_CmdBuffer_Index += FT_CMD_SIZE;
+  #ifdef  BUFFER_OPTIMIZATION
+  /* Copy the command instruction into buffer */
+  ft_uint32_t *pBuffcmd;
+  pBuffcmd =(ft_uint32_t*)&Ft_CmdBuffer[Ft_CmdBuffer_Index];
+  *pBuffcmd = cmd;
+  #endif
+  Ft_Gpu_Hal_WrCmd32(phost,cmd);
+  /* Increment the command index */
+  Ft_CmdBuffer_Index += FT_CMD_SIZE;
 }
 
 ft_void_t Ft_App_Flush_Co_Buffer(Ft_Gpu_Hal_Context_t *phost)
 {
-#ifdef  BUFFER_OPTIMIZATION
-   if (Ft_CmdBuffer_Index > 0)
-     Ft_Gpu_Hal_WrCmdBuf(phost,Ft_CmdBuffer,Ft_CmdBuffer_Index);
-#endif
-   Ft_CmdBuffer_Index = 0;
+  #ifdef  BUFFER_OPTIMIZATION
+  if (Ft_CmdBuffer_Index > 0)
+  Ft_Gpu_Hal_WrCmdBuf(phost,Ft_CmdBuffer,Ft_CmdBuffer_Index);
+  #endif
+  Ft_CmdBuffer_Index = 0;
 }
 
 
 struct
 {
-	ft_uint8_t Key_Detect :1;
-	ft_uint8_t Caps :1;
-	ft_uint8_t Numeric : 1;
-	ft_uint8_t Exit : 1;
+  ft_uint8_t Key_Detect :1;
+  ft_uint8_t Caps :1;
+  ft_uint8_t Numeric : 1;
+  ft_uint8_t Exit : 1;
 }Flag;
 
 static byte istouch()
@@ -206,59 +206,59 @@ void Notepad(void)
     pinMode(PIN_OFFSET + i, OUTPUT);
   }
 
-/*enter*/
+  /*enter*/
   Flag.Exit = 0;
   do
   {
     Read_sfk = Read_Keypad();                // read the keys
 
 
-// Start the new Display list
-  Ft_Gpu_CoCmd_Dlstart(phost);
-  Ft_App_WrCoCmd_Buffer(phost,CLEAR_COLOR_RGB(100,100,100));
-  Ft_App_WrCoCmd_Buffer(phost,CLEAR(1,1,1));
-  Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(255,255,255));
-  Ft_App_WrCoCmd_Buffer(phost,TAG_MASK(1));            // enable tagbuffer updation
-  Ft_Gpu_CoCmd_FgColor(phost,0x663300);
-  Ft_Gpu_CoCmd_BgColor(phost,0x662244);
+    // Start the new Display list
+    Ft_Gpu_CoCmd_Dlstart(phost);
+    Ft_App_WrCoCmd_Buffer(phost,CLEAR_COLOR_RGB(100,100,100));
+    Ft_App_WrCoCmd_Buffer(phost,CLEAR(1,1,1));
+    Ft_App_WrCoCmd_Buffer(phost,COLOR_RGB(255,255,255));
+    Ft_App_WrCoCmd_Buffer(phost,TAG_MASK(1));            // enable tagbuffer updation
+    Ft_Gpu_CoCmd_FgColor(phost,0x663300);
+    Ft_Gpu_CoCmd_BgColor(phost,0x662244);
 
-  if (Read_sfk == NEXT_SFK && current_state + 1 < NUM_STATES) {
-    current_state++;
-    sprintf(state_string, "%d", current_state + PIN_OFFSET);
-  } else if (Read_sfk == PREV_SFK && current_state > 0) {
-    current_state--;
-    sprintf(state_string, "%d", current_state + PIN_OFFSET);
-  }
-
-  ft_uint32_t temp = state_outputs[current_state];
-  for (int pin = 0; pin < NUM_PINS; pin++) {
-    if (temp & 0x01) {
-      digitalWrite(PIN_OFFSET + pin, HIGH);
-    } else {
-      digitalWrite(PIN_OFFSET + pin, LOW);
+    if (Read_sfk == NEXT_SFK && current_state + 1 < NUM_STATES) {
+      current_state++;
+      sprintf(state_string, "%d", current_state + PIN_OFFSET);
+    } else if (Read_sfk == PREV_SFK && current_state > 0) {
+      current_state--;
+      sprintf(state_string, "%d", current_state + PIN_OFFSET);
     }
 
-    temp >>= 1;
-  }
+    ft_uint32_t temp = state_outputs[current_state];
+    for (int pin = 0; pin < NUM_PINS; pin++) {
+      if (temp & 0x01) {
+        digitalWrite(PIN_OFFSET + pin, HIGH);
+      } else {
+        digitalWrite(PIN_OFFSET + pin, LOW);
+      }
 
-  int test;
-  if (Read_sfk == NEXT_SFK) {
-    test = 150;
-  } else {
-    test = 100;
-  }
-  But_opt = (Read_sfk== NEXT_SFK)?  OPT_FLAT:0;
-  Ft_App_WrCoCmd_Buffer(phost,TAG(NEXT_SFK));
-  Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth - 100),(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Next");
-  But_opt = (Read_sfk== PREV_SFK)?  OPT_FLAT:0;
-  Ft_App_WrCoCmd_Buffer(phost,TAG(PREV_SFK));
-  Ft_Gpu_CoCmd_Button(phost,2,(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Prev");
-  Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2 + 15,26,OPT_CENTERX|OPT_CENTERY,state_string);
-  Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
-  Ft_Gpu_CoCmd_Swap(phost);
-  Ft_App_Flush_Co_Buffer(phost);
-  Ft_Gpu_Hal_WaitCmdfifo_empty(phost);
- }while(1);
+      temp >>= 1;
+    }
+
+    int test;
+    if (Read_sfk == NEXT_SFK) {
+      test = 150;
+    } else {
+      test = 100;
+    }
+    But_opt = (Read_sfk== NEXT_SFK)?  OPT_FLAT:0;
+    Ft_App_WrCoCmd_Buffer(phost,TAG(NEXT_SFK));
+    Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth - 100),(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Next");
+    But_opt = (Read_sfk== PREV_SFK)?  OPT_FLAT:0;
+    Ft_App_WrCoCmd_Buffer(phost,TAG(PREV_SFK));
+    Ft_Gpu_CoCmd_Button(phost,2,(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Prev");
+    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2 + 15,26,OPT_CENTERX|OPT_CENTERY,state_string);
+    Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
+    Ft_Gpu_CoCmd_Swap(phost);
+    Ft_App_Flush_Co_Buffer(phost);
+    Ft_Gpu_Hal_WaitCmdfifo_empty(phost);
+  }while(1);
 
 }
 /***********************API used to SET the ICON******************************************/
@@ -282,79 +282,79 @@ ft_void_t Info()
 }
 ft_void_t Ft_BootupConfig()
 {
-	Ft_Gpu_Hal_Powercycle(phost,FT_TRUE);
+  Ft_Gpu_Hal_Powercycle(phost,FT_TRUE);
 
-		/* Access address 0 to wake up the FT800 */
-		Ft_Gpu_HostCommand(phost,FT_GPU_ACTIVE_M);
-		Ft_Gpu_Hal_Sleep(20);
+  /* Access address 0 to wake up the FT800 */
+  Ft_Gpu_HostCommand(phost,FT_GPU_ACTIVE_M);
+  Ft_Gpu_Hal_Sleep(20);
 
-		/* Set the clk to external clock */
-#ifndef ME800A_HV35R
-		Ft_Gpu_HostCommand(phost,FT_GPU_EXTERNAL_OSC);
-		Ft_Gpu_Hal_Sleep(10);
-#endif
+  /* Set the clk to external clock */
+  #ifndef ME800A_HV35R
+  Ft_Gpu_HostCommand(phost,FT_GPU_EXTERNAL_OSC);
+  Ft_Gpu_Hal_Sleep(10);
+  #endif
 
-		{
-			ft_uint8_t chipid;
-			//Read Register ID to check if FT800 is ready.
-			chipid = Ft_Gpu_Hal_Rd8(phost, REG_ID);
-			while(chipid != 0x7C)
-			{
-				chipid = Ft_Gpu_Hal_Rd8(phost, REG_ID);
-				printf("VC1 register ID after wake up %x\n",chipid);
-				ft_delay(100);
-			}
-	#if defined(MSVC_PLATFORM) || defined (FT900_PLATFORM)
-			printf("VC1 register ID after wake up %x\n",chipid);
-	#endif
-	}
+  {
+    ft_uint8_t chipid;
+    //Read Register ID to check if FT800 is ready.
+    chipid = Ft_Gpu_Hal_Rd8(phost, REG_ID);
+    while(chipid != 0x7C)
+    {
+      chipid = Ft_Gpu_Hal_Rd8(phost, REG_ID);
+      printf("VC1 register ID after wake up %x\n",chipid);
+      ft_delay(100);
+    }
+    #if defined(MSVC_PLATFORM) || defined (FT900_PLATFORM)
+    printf("VC1 register ID after wake up %x\n",chipid);
+    #endif
+  }
 
-	Ft_Gpu_Hal_Wr16(phost, REG_HCYCLE, FT_DispHCycle);
-	Ft_Gpu_Hal_Wr16(phost, REG_HOFFSET, FT_DispHOffset);
-	Ft_Gpu_Hal_Wr16(phost, REG_HSYNC0, FT_DispHSync0);
-	Ft_Gpu_Hal_Wr16(phost, REG_HSYNC1, FT_DispHSync1);
-	Ft_Gpu_Hal_Wr16(phost, REG_VCYCLE, FT_DispVCycle);
-	Ft_Gpu_Hal_Wr16(phost, REG_VOFFSET, FT_DispVOffset);
-	Ft_Gpu_Hal_Wr16(phost, REG_VSYNC0, FT_DispVSync0);
-	Ft_Gpu_Hal_Wr16(phost, REG_VSYNC1, FT_DispVSync1);
-	Ft_Gpu_Hal_Wr8(phost, REG_SWIZZLE, FT_DispSwizzle);
-	Ft_Gpu_Hal_Wr8(phost, REG_PCLK_POL, FT_DispPCLKPol);
-	Ft_Gpu_Hal_Wr16(phost, REG_HSIZE, FT_DispWidth);
-	Ft_Gpu_Hal_Wr16(phost, REG_VSIZE, FT_DispHeight);
-	Ft_Gpu_Hal_Wr16(phost, REG_CSPREAD, FT_DispCSpread);
-	Ft_Gpu_Hal_Wr16(phost, REG_DITHER, FT_DispDither);
+  Ft_Gpu_Hal_Wr16(phost, REG_HCYCLE, FT_DispHCycle);
+  Ft_Gpu_Hal_Wr16(phost, REG_HOFFSET, FT_DispHOffset);
+  Ft_Gpu_Hal_Wr16(phost, REG_HSYNC0, FT_DispHSync0);
+  Ft_Gpu_Hal_Wr16(phost, REG_HSYNC1, FT_DispHSync1);
+  Ft_Gpu_Hal_Wr16(phost, REG_VCYCLE, FT_DispVCycle);
+  Ft_Gpu_Hal_Wr16(phost, REG_VOFFSET, FT_DispVOffset);
+  Ft_Gpu_Hal_Wr16(phost, REG_VSYNC0, FT_DispVSync0);
+  Ft_Gpu_Hal_Wr16(phost, REG_VSYNC1, FT_DispVSync1);
+  Ft_Gpu_Hal_Wr8(phost, REG_SWIZZLE, FT_DispSwizzle);
+  Ft_Gpu_Hal_Wr8(phost, REG_PCLK_POL, FT_DispPCLKPol);
+  Ft_Gpu_Hal_Wr16(phost, REG_HSIZE, FT_DispWidth);
+  Ft_Gpu_Hal_Wr16(phost, REG_VSIZE, FT_DispHeight);
+  Ft_Gpu_Hal_Wr16(phost, REG_CSPREAD, FT_DispCSpread);
+  Ft_Gpu_Hal_Wr16(phost, REG_DITHER, FT_DispDither);
 
-#if (defined(ENABLE_FT_800) || defined(ENABLE_FT_810) ||defined(ENABLE_FT_812))
-    /* Touch configuration - configure the resistance value to 1200 - this value is specific to customer requirement and derived by experiment */
-    Ft_Gpu_Hal_Wr16(phost, REG_TOUCH_RZTHRESH,1200);
-#endif
-    Ft_Gpu_Hal_Wr8(phost, REG_GPIO_DIR,0xff);
-    Ft_Gpu_Hal_Wr8(phost, REG_GPIO,0xff);
-
-
-    /*It is optional to clear the screen here*/
-    Ft_Gpu_Hal_WrMem(phost, RAM_DL,(ft_uint8_t *)FT_DLCODE_BOOTUP,sizeof(FT_DLCODE_BOOTUP));
-    Ft_Gpu_Hal_Wr8(phost, REG_DLSWAP,DLSWAP_FRAME);
+  #if (defined(ENABLE_FT_800) || defined(ENABLE_FT_810) ||defined(ENABLE_FT_812))
+  /* Touch configuration - configure the resistance value to 1200 - this value is specific to customer requirement and derived by experiment */
+  Ft_Gpu_Hal_Wr16(phost, REG_TOUCH_RZTHRESH,1200);
+  #endif
+  Ft_Gpu_Hal_Wr8(phost, REG_GPIO_DIR,0xff);
+  Ft_Gpu_Hal_Wr8(phost, REG_GPIO,0xff);
 
 
-    Ft_Gpu_Hal_Wr8(phost, REG_PCLK,FT_DispPCLK);//after this display is visible on the LCD
+  /*It is optional to clear the screen here*/
+  Ft_Gpu_Hal_WrMem(phost, RAM_DL,(ft_uint8_t *)FT_DLCODE_BOOTUP,sizeof(FT_DLCODE_BOOTUP));
+  Ft_Gpu_Hal_Wr8(phost, REG_DLSWAP,DLSWAP_FRAME);
+
+
+  Ft_Gpu_Hal_Wr8(phost, REG_PCLK,FT_DispPCLK);//after this display is visible on the LCD
 
 
 
 
-	/* make the spi to quad mode - addition 2 bytes for silicon */
-#ifdef FT_81X_ENABLE
-	/* api to set quad and numbe of dummy bytes */
-#ifdef ENABLE_SPI_QUAD
-	Ft_Gpu_Hal_SetSPI(phost,FT_GPU_SPI_QUAD_CHANNEL,FT_GPU_SPI_TWODUMMY);
-#elif ENABLE_SPI_DUAL
-	Ft_Gpu_Hal_SetSPI(phost,FT_GPU_SPI_QUAD_CHANNEL,FT_GPU_SPI_TWODUMMY);
-#else
-	Ft_Gpu_Hal_SetSPI(phost,FT_GPU_SPI_SINGLE_CHANNEL,FT_GPU_SPI_ONEDUMMY);
+  /* make the spi to quad mode - addition 2 bytes for silicon */
+  #ifdef FT_81X_ENABLE
+  /* api to set quad and numbe of dummy bytes */
+  #ifdef ENABLE_SPI_QUAD
+  Ft_Gpu_Hal_SetSPI(phost,FT_GPU_SPI_QUAD_CHANNEL,FT_GPU_SPI_TWODUMMY);
+  #elif ENABLE_SPI_DUAL
+  Ft_Gpu_Hal_SetSPI(phost,FT_GPU_SPI_QUAD_CHANNEL,FT_GPU_SPI_TWODUMMY);
+  #else
+  Ft_Gpu_Hal_SetSPI(phost,FT_GPU_SPI_SINGLE_CHANNEL,FT_GPU_SPI_ONEDUMMY);
 
-#endif
-#endif
-phost->ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(phost,REG_CMD_WRITE);
+  #endif
+  #endif
+  phost->ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(phost,REG_CMD_WRITE);
 
 }
 
@@ -362,9 +362,9 @@ phost->ft_cmd_fifo_wp = Ft_Gpu_Hal_Rd16(phost,REG_CMD_WRITE);
 /* Main entry point */
 ft_void_t setup() {
 
-	ft_uint8_t chipid;
-	Ft_Gpu_HalInit_t halinit;
-	halinit.TotalChannelNum = 1;
+  ft_uint8_t chipid;
+  Ft_Gpu_HalInit_t halinit;
+  halinit.TotalChannelNum = 1;
   Ft_Gpu_Hal_Init(&halinit);
   host.hal_config.channel_no = 0;
   host.hal_config.pdn_pin_no = FT800_PD_N;
