@@ -353,7 +353,50 @@ void Notepad(void)
   ft_uint8_t Read_sfk=0,	tval;
   ft_uint16_t noofchars=0,line2disp =0,nextline = 0;	
   ft_uint8_t   font = 27;
-  
+
+  const ft_uint16_t NEXT_SFK = 201;
+  const ft_uint16_t PREV_SFK = 200;
+  const ft_uint16_t NUM_STATES = 30;
+  const ft_uint16_t NUM_PINS = 30;
+  const ft_uint16_t PIN_OFFSET = 22;
+  ft_uint16_t current_state = 0;
+  ft_uint32_t state_outputs[NUM_STATES] = {
+    0x00000001,
+    0x00000002,
+    0x00000004,
+    0x00000008,
+    0x00000010,
+    0x00000020,
+    0x00000040,
+    0x00000080,
+    0x00000100,
+    0x00000200,
+    0x00000400,
+    0x00000800,
+    0x00001000,
+    0x00002000,
+    0x00004000,
+    0x00008000,
+    0x00010000,
+    0x00020000,
+    0x00040000,
+    0x00080000,
+    0x00100000,
+    0x00200000,
+    0x00400000,
+    0x00800000,
+    0x01000000,
+    0x02000000,
+    0x04000000,
+    0x08000000,
+    0x10000000,
+    0x20000000,
+  };
+
+  for (int i = 0; i < NUM_PINS; i++) {
+    pinMode(PIN_OFFSET + i, OUTPUT);
+  }
+
 /*enter*/
   Flag.Exit = 0;
   do
@@ -369,18 +412,35 @@ void Notepad(void)
   Ft_App_WrCoCmd_Buffer(phost,TAG_MASK(1));            // enable tagbuffer updation
   Ft_Gpu_CoCmd_FgColor(phost,0x993366);  
   Ft_Gpu_CoCmd_BgColor(phost,0x662244);
+
+  if (Read_sfk == NEXT_SFK && current_state + 1 < NUM_STATES) {
+    current_state++;
+  } else if (Read_sfk == PREV_SFK && current_state > 0) {
+    current_state--;
+  }
+
+  ft_uint32_t temp = state_outputs[current_state];
+  for (int pin = 0; pin < NUM_PINS; pin++) {
+    if (temp & 0x01) {
+      digitalWrite(PIN_OFFSET + pin, HIGH);
+    } else {
+      digitalWrite(PIN_OFFSET + pin, LOW);
+    }
+
+    temp >>= 1;
+  }
   
   int test;
-  if (Read_sfk == 201) {
+  if (Read_sfk == NEXT_SFK) {
     test = 150;
   } else {
     test = 100;
   }
-  But_opt = (Read_sfk== 201)?  OPT_FLAT:0;
-  Ft_App_WrCoCmd_Buffer(phost,TAG(201));
+  But_opt = (Read_sfk== NEXT_SFK)?  OPT_FLAT:0;
+  Ft_App_WrCoCmd_Buffer(phost,TAG(NEXT_SFK));
   Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth-test),(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Next");
-  But_opt = (Read_sfk== 200)?  OPT_FLAT:0;
-  Ft_App_WrCoCmd_Buffer(phost,TAG(200));
+  But_opt = (Read_sfk== PREV_SFK)?  OPT_FLAT:0;
+  Ft_App_WrCoCmd_Buffer(phost,TAG(PREV_SFK));
   Ft_Gpu_CoCmd_Button(phost,2,(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Prev");
   Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
   Ft_Gpu_CoCmd_Swap(phost);
