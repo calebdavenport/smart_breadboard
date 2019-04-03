@@ -159,6 +159,8 @@ void Notepad(void)
   ft_uint16_t noofchars=0,line2disp =0,nextline = 0;
   ft_uint8_t   font = 27;
 
+  char *state_string = malloc(10 * sizeof(char));
+  state_string[9] = '\0';
   const ft_uint16_t NEXT_SFK = 201;
   const ft_uint16_t PREV_SFK = 200;
   const ft_uint16_t NUM_STATES = 30;
@@ -198,6 +200,8 @@ void Notepad(void)
     0x20000000,
   };
 
+  sprintf(state_string, "%d", current_state + PIN_OFFSET);
+
   for (int i = 0; i < NUM_PINS; i++) {
     pinMode(PIN_OFFSET + i, OUTPUT);
   }
@@ -220,8 +224,10 @@ void Notepad(void)
 
   if (Read_sfk == NEXT_SFK && current_state + 1 < NUM_STATES) {
     current_state++;
+    sprintf(state_string, "%d", current_state + PIN_OFFSET);
   } else if (Read_sfk == PREV_SFK && current_state > 0) {
     current_state--;
+    sprintf(state_string, "%d", current_state + PIN_OFFSET);
   }
 
   ft_uint32_t temp = state_outputs[current_state];
@@ -234,7 +240,7 @@ void Notepad(void)
 
     temp >>= 1;
   }
-  
+
   int test;
   if (Read_sfk == NEXT_SFK) {
     test = 150;
@@ -243,10 +249,11 @@ void Notepad(void)
   }
   But_opt = (Read_sfk== NEXT_SFK)?  OPT_FLAT:0;
   Ft_App_WrCoCmd_Buffer(phost,TAG(NEXT_SFK));
-  Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth-test),(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Next");
+  Ft_Gpu_CoCmd_Button(phost,(FT_DispWidth - 100),(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Next");
   But_opt = (Read_sfk== PREV_SFK)?  OPT_FLAT:0;
   Ft_App_WrCoCmd_Buffer(phost,TAG(PREV_SFK));
   Ft_Gpu_CoCmd_Button(phost,2,(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Prev");
+  Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2 + 15,26,OPT_CENTERX|OPT_CENTERY,state_string);
   Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
   Ft_Gpu_CoCmd_Swap(phost);
   Ft_App_Flush_Co_Buffer(phost);
