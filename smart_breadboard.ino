@@ -82,7 +82,6 @@ const ft_uint8_t FT_DLCODE_BOOTUP[12] =
 {
   0,0,0,2,//GPU instruction CLEAR_COLOR_RGB
   7,0,0,38, //GPU instruction CLEAR
-
   0,0,0,0,  //GPU instruction DISPLAY
 };
 ft_void_t Ft_App_WrCoCmd_Buffer(Ft_Gpu_Hal_Context_t *phost,ft_uint32_t cmd)
@@ -111,8 +110,6 @@ ft_void_t Ft_App_Flush_Co_Buffer(Ft_Gpu_Hal_Context_t *phost)
 struct
 {
   ft_uint8_t Key_Detect :1;
-  ft_uint8_t Caps :1;
-  ft_uint8_t Numeric : 1;
   ft_uint8_t Exit : 1;
 }Flag;
 
@@ -158,6 +155,7 @@ void Notepad(void)
   ft_uint8_t Read_sfk=0,	tval;
   ft_uint16_t noofchars=0,line2disp =0,nextline = 0;
   ft_uint8_t   font = 27;
+  ft_uint8_t button_active = 0;
 
   char *state_string = malloc(10 * sizeof(char));
   state_string[9] = '\0';
@@ -222,12 +220,16 @@ void Notepad(void)
     Ft_Gpu_CoCmd_FgColor(phost,0x663300);
     Ft_Gpu_CoCmd_BgColor(phost,0x662244);
 
-    if (Read_sfk == NEXT_SFK && current_state + 1 < NUM_STATES) {
+    if (Read_sfk == NEXT_SFK && current_state + 1 < NUM_STATES && !button_active) {
       current_state++;
       sprintf(state_string, "%d", current_state + PIN_OFFSET);
-    } else if (Read_sfk == PREV_SFK && current_state > 0) {
+      button_active = 1;
+    } else if (Read_sfk == PREV_SFK && current_state > 0 && !button_active) {
       current_state--;
       sprintf(state_string, "%d", current_state + PIN_OFFSET);
+      button_active = 1;
+    } else if (Read_sfk != NEXT_SFK && Read_sfk != PREV_SFK){
+      button_active = 0;
     }
 
     ft_uint32_t temp = state_outputs[current_state];
