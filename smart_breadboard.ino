@@ -117,7 +117,6 @@ static byte istouch()
 {
   return !(Ft_Gpu_Hal_Rd16(phost,REG_TOUCH_RAW_XY) & 0x8000);
 }
-static ft_uint8_t sk=0;
 
 
 ft_uint8_t Read_Keypad()
@@ -150,11 +149,8 @@ ft_uint8_t Read_Keypad()
 void Notepad(void)
 {
   /*local variables*/
-  ft_uint8_t Line=0;
-  ft_uint16_t Disp_pos = 0,But_opt;
-  ft_uint8_t Read_sfk=0,	tval;
-  ft_uint16_t noofchars=0,line2disp =0,nextline = 0;
-  ft_uint8_t   font = 27;
+  ft_uint16_t But_opt;
+  ft_uint8_t Read_sfk=0;
   ft_uint8_t button_active = 0;
 
   char *state_string = malloc(10 * sizeof(char));
@@ -268,7 +264,6 @@ void Notepad(void)
 /* Information API*/
 ft_void_t Info()
 {
-  ft_uint16_t dloffset = 0,z;
   Ft_CmdBuffer_Index = 0;
   // Touch Screen Calibration
   Ft_Gpu_CoCmd_Dlstart(phost);
@@ -364,7 +359,6 @@ ft_void_t Ft_BootupConfig()
 /* Main entry point */
 ft_void_t setup() {
 
-  ft_uint8_t chipid;
   Ft_Gpu_HalInit_t halinit;
   halinit.TotalChannelNum = 1;
   Ft_Gpu_Hal_Init(&halinit);
