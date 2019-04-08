@@ -232,7 +232,7 @@ void Notepad(void)
     Ft_App_WrCoCmd_Buffer(phost,TAG(PREV_SFK));
     Ft_Gpu_CoCmd_Button(phost,2,(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Prev");
     Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2 + 15,26,OPT_CENTERX|OPT_CENTERY,state_string);
-    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/3,FT_DispHeight/3 + 15,26,OPT_CENTERX|OPT_CENTERY,state[current_state].text);
+    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/3,FT_DispHeight/3 + 15,26,OPT_CENTERX|OPT_CENTERY,states[current_state].text);
     Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
     Ft_Gpu_CoCmd_Swap(phost);
     Ft_App_Flush_Co_Buffer(phost);
