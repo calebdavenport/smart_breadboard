@@ -151,8 +151,25 @@ struct State {
   char *desc;
 };
 
-// Notepad buffer
-void Notepad(void)
+void BreadTest(void) {
+  const ft_uint16_t NUM_PINS = 30;
+  const ft_uint16_t PIN_OFFSET = 22;
+
+  for (int i = 0; i < NUM_PINS; i++) {
+    pinMode(PIN_OFFSET + i, OUTPUT);
+  }
+  for (int pin = 0; pin < NUM_PINS; pin++) {
+    digitalWrite(PIN_OFFSET + pin, HIGH);
+    delay(20);
+  }
+  for (int pin = 0; pin < NUM_PINS; pin++) {
+    digitalWrite(PIN_OFFSET + pin, LOW);
+    delay(20);
+  }
+}
+
+// Breadboard buffer
+void Breadboard(void)
 {
   /*local variables*/
   ft_uint16_t But_opt;
@@ -354,9 +371,10 @@ ft_void_t setup() {
   phost = &host;
 
   Ft_BootupConfig();
+  BreadTest();
   Info(); //Set screen calibration
   Ft_Gpu_Hal_Sleep(100);
-  Notepad(); // Main loop
+  Breadboard(); // Main loop
 }
 
 void loop()
