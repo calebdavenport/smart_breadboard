@@ -145,6 +145,11 @@ ft_uint8_t Read_Keypad()
   return Read_tag;
 }
 
+struct State {
+  ft_uint32_t output;
+  char *text;
+};
+
 // Notepad buffer
 void Notepad(void)
 {
@@ -161,37 +166,12 @@ void Notepad(void)
   const ft_uint16_t NUM_PINS = 30;
   const ft_uint16_t PIN_OFFSET = 22;
   ft_uint16_t current_state = 0;
-  ft_uint32_t state_outputs[NUM_STATES] = {
-    0x00000001,
-    0x00000002,
-    0x00000004,
-    0x00000008,
-    0x00000010,
-    0x00000020,
-    0x00000040,
-    0x00000080,
-    0x00000100,
-    0x00000200,
-    0x00000400,
-    0x00000800,
-    0x00001000,
-    0x00002000,
-    0x00004000,
-    0x00008000,
-    0x00010000,
-    0x00020000,
-    0x00040000,
-    0x00080000,
-    0x00100000,
-    0x00200000,
-    0x00400000,
-    0x00800000,
-    0x01000000,
-    0x02000000,
-    0x04000000,
-    0x08000000,
-    0x10000000,
-    0x20000000,
+  State states[NUM_STATES] = {
+    {0x00000011, "Attach resistor"},
+    {0x00000010, "Attach LED cathode"},
+    {0x00000002, "Attach LED anode"},
+    {0x00000002, "Attach battery - terminal"},
+    {0x00000001, "Attach battery + terminal"},
   };
 
   sprintf(state_string, "%d", current_state + PIN_OFFSET);
@@ -228,7 +208,7 @@ void Notepad(void)
       button_active = 0;
     }
 
-    ft_uint32_t temp = state_outputs[current_state];
+    ft_uint32_t temp = states[current_state].output;
     for (int pin = 0; pin < NUM_PINS; pin++) {
       if (temp & 0x01) {
         digitalWrite(PIN_OFFSET + pin, HIGH);
@@ -252,6 +232,7 @@ void Notepad(void)
     Ft_App_WrCoCmd_Buffer(phost,TAG(PREV_SFK));
     Ft_Gpu_CoCmd_Button(phost,2,(FT_DispHeight*0.01),98,(FT_DispHeight*0.98),28,But_opt,"Prev");
     Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2 + 15,26,OPT_CENTERX|OPT_CENTERY,state_string);
+    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/3,FT_DispHeight/3 + 15,26,OPT_CENTERX|OPT_CENTERY,state[current_state].text);
     Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
     Ft_Gpu_CoCmd_Swap(phost);
     Ft_App_Flush_Co_Buffer(phost);
