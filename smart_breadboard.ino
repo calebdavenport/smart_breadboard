@@ -147,7 +147,8 @@ ft_uint8_t Read_Keypad()
 
 struct State {
   ft_uint32_t output;
-  char *text;
+  char *step;
+  char *desc;
 };
 
 // Notepad buffer
@@ -167,11 +168,11 @@ void Notepad(void)
   const ft_uint16_t PIN_OFFSET = 22;
   ft_uint16_t current_state = 0;
   State states[NUM_STATES] = {
-    {0x00000011, "Attach resistor"},
-    {0x00000010, "Attach LED cathode"},
-    {0x00000002, "Attach LED anode"},
-    {0x00000002, "Attach battery - terminal"},
-    {0x00000001, "Attach battery + terminal"},
+    {0x00000011, "Attach resistor", "Row 1 (A-E) to Row 5 (A-E)"},
+    {0x00000010, "Attach LED cathode", "Row 5 (A-E)"},
+    {0x00000002, "Attach LED anode", "Row 1 (F-J)"},
+    {0x00000002, "Attach battery - terminal", "Row 1 (F-J)"},
+    {0x00000001, "Attach battery + terminal", "Row 1 (A-E)"},
   };
 
   sprintf(state_string, "%d", current_state + PIN_OFFSET);
@@ -232,7 +233,8 @@ void Notepad(void)
     Ft_App_WrCoCmd_Buffer(phost,TAG(PREV_SFK));
     Ft_Gpu_CoCmd_Button(phost,2,(FT_DispHeight*0.75),98,(FT_DispHeight*0.23),28,But_opt,"Prev");
     Ft_App_WrCoCmd_Buffer(phost,TAG(300));
-    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2 + 15,30,OPT_CENTERX|OPT_CENTERY,states[current_state].text);
+    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2 - 40,30,OPT_CENTERX|OPT_CENTERY,states[current_state].step);
+    Ft_Gpu_CoCmd_Text(phost,FT_DispWidth/2,FT_DispHeight/2 + 85,26,OPT_CENTERX|OPT_CENTERY,states[current_state].desc);
     Ft_App_WrCoCmd_Buffer(phost,DISPLAY());
     Ft_Gpu_CoCmd_Swap(phost);
     Ft_App_Flush_Co_Buffer(phost);
